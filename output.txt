@@ -1,0 +1,52 @@
+Email:
+
+Hi Mike,
+
+I noticed you've been leading agile and Scrum training at Mountain Goat Software since 2000, helping companies adopt and succeed with agile software development. How do you see AI impacting the future of agile project management?
+
+Having worked in AI for customer support for several years, I know firsthand how challenging it can be to streamline customer interactions.
+But when done right, it can make a huge difference in efficiency and customer satisfaction.
+
+I’ve developed AI solutions that transform customer support processes and help companies handle customer inquiries more effectively.
+If you're curious about how this can work for you, I’d be glad to share more. 
+
+If interested, just shoot me a reply.
+
+Thanks, Oskar
+
+PS. If you’re wondering about the power of AI, this email was crafted with the help of AI ;)
+----------------------------------------------------------------------
+Call Script:
+
+Here is a personalized cold call script for Mike Cohn, the owner of Mountain Goat Software:
+
+**Introduction:**
+
+"Hi Mike, this is Aymen from SupportAI Solutions. How are you today?"
+
+**Personalized Hook:**
+
+"I've been impressed by Mountain Goat Software's commitment to providing high-quality agile and Scrum training to organizations around the world. Your company's focus on helping teams succeed with agile is truly inspiring."
+
+**Situation Questions:**
+
+"I wanted to ask, how do you currently handle customer inquiries and support requests for your online training courses and mentoring services? Are there any specific challenges you're facing with your current system?"
+
+**Problem Questions:**
+
+"As a leading provider of agile and Scrum training, how do you ensure that your customer support team has the necessary knowledge and resources to effectively address complex questions and issues from your customers? Are there any gaps in your current support process that you're looking to fill?"
+
+**Implication Questions:**
+
+"With your company's focus on helping organizations succeed with agile, how do you think automated ticket management and intelligent chatbots could help you provide more efficient and effective support to your customers? Could this help you free up more time for your team to focus on high-value tasks, such as mentoring and coaching?"
+
+**Need-Payoff Questions:**
+
+"As the owner of Mountain Goat Software, how do you balance the need to provide high-quality customer support with the need to keep costs under control? Are you interested in exploring low-code solutions that can help you achieve this balance? How would automating routine support tasks with AI-driven tools from SupportAI Solutions improve your customer support efficiency and team performance?"
+
+**Closing:**
+
+"I believe SupportAI Solutions can offer the right tools to meet Mountain Goat Software's needs. Would you be open to a brief meeting next week to explore how we can enhance your customer support processes and help you achieve your goals?"
+
+This script incorporates the spin selling questions and is tailored to Mike Cohn's role as the owner of Mountain Goat Software. It aims to engage him in a meaningful conversation about his company's customer support challenges and how SupportAI Solutions can help address them.
+----------------------------------------------------------------------
