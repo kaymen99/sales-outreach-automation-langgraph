@@ -81,133 +81,79 @@ def scrape_linkedin(linkedin_url, is_company):
     else:
         print(f"Request failed with status code: {response.status_code}")
 
-# def search_lead_company(company_name):
-#     """
-#     Searches for the company LinkedIn profile based on the company name.
-    
-#     @param company_name: The name of the company to search for.
-#     @return: A dictionary containing the company profile data or an error message if not found.
-#     """
-#     # Find company LinkedIn URL by searching on Google 'LinkedIn {{company_name}}'
-#     query = f"LinkedIn {company_name}"
-#     search_results = google_search(query)
-#     company_linkedin_url = extract_linkedin_url(search_results, True)
-#     print(company_linkedin_url)
-
-#     if not company_linkedin_url:
-#         return "Company LinkedIn URL not found."
-
-#     # Scrape company LinkedIn page
-#     company_page_content = scrape_linkedin(company_linkedin_url, True)
-#     if "data" not in company_page_content:
-#         return "LinkedIn profile not found"
-    
-#     company_profile = company_page_content["data"]
-#     return {
-#         "company_name": company_profile.get("company_name", ""),
-#         "company_description": company_profile.get("description", ""),
-#         "company_website": company_profile.get("website", ""),
-#         "company_location": company_profile.get("locations", []),
-#         "company_industry": company_profile.get("industries", []),
-#         "company_size": company_profile.get("employee_count", company_profile.get("employee_range", ""))
-#     }
-
-# def search_lead_profile(lead_name, company_name):
-#     """
-#     Searches for the lead's LinkedIn profile based on the lead name and company name.
-    
-#     @param lead_name: The name of the lead to search for.
-#     @param company_name: The name of the company to associate with the lead.
-#     @return: A dictionary containing the lead profile data or an error message if not found.
-#     """
-#     # Find lead LinkedIn URL by searching on Google 'LinkedIn {{lead_name}} {{company_name}}'
-#     query = f"LinkedIn {lead_name} {company_name}"
-#     search_results = google_search(query)
-#     lead_linkedin_url = extract_linkedin_url(search_results, False)
-
-#     if not lead_linkedin_url:
-#         return "Lead LinkedIn URL not found."
-
-#     # Scrape lead LinkedIn profile
-#     lead_profile_content = scrape_linkedin(lead_linkedin_url, False)
-#     if "data" not in lead_profile_content:
-#         return "LinkedIn profile not found"
-    
-#     lead_profile_content = lead_profile_content["data"]
-#     return {
-#         "about": lead_profile_content.get('about', ''),
-#         "skills": lead_profile_content.get('skills', []),
-#         "educations": [
-#             {
-#                 "field_of_study": edu.get('field_of_study', ''),
-#                 "date_range": edu.get('date_range', '')
-#             } for edu in lead_profile_content.get('educations', [])
-#         ],
-#         "experiences": [
-#             {
-#                 "company": exp.get('company', ''),
-#                 "title": exp.get('title', ''),
-#                 "date_range": exp.get('date_range', ''),
-#                 "is_current": exp.get('is_current', False),
-#                 "location": exp.get('location', ''),
-#                 "description": exp.get('description', '')
-#             } for exp in lead_profile_content.get('experiences', [])
-#         ]
-#     }
-
-# create mock functions for testing
 def search_lead_company(company_name):
-    return {'company_name': 'Mountain Goat Software',
-            'company_description': 'Led by CST, author and Scrum practitioner Mike Cohn, Mountain Goat Software helps companies adopt and improve their use of agile processes and techniques in order to build high-performance development organizations. \n\nMountain Goat Software provides live online training courses all over\nthe world. Live online courses include Certified ScrumMaster (CSM)\ntraining and Certified Scrum Product Owner (CSPO) training. We also\noffer on demand video courses such as Agile Estimating and Planning,\nScrum Repair Guide, Better User Stories and Estimating with Story\nPoints. In addition to our training offerings we provide mentoring to\ncompanies to help you Succeed with Agile.\n',
-            'company_website': 'http://www.mountaingoatsoftware.com',
-            'company_location': [{'city': 'Broomfield',
-              'country': 'US',
-              'full_address': '1140 US Highway 287, Broomfield, CO 80020, US',
-              'is_headquarter': True,
-              'line1': '1140 US Highway 287',
-              'line2': '',
-              'region': 'CO',
-              'zipcode': '80020'}],
-            'company_industry': ['Software Development'],
-            'company_size': 21
-            }
+    """
+    Searches for the company LinkedIn profile based on the company name.
+    
+    @param company_name: The name of the company to search for.
+    @return: A dictionary containing the company profile data or an error message if not found.
+    """
+    # Find company LinkedIn URL by searching on Google 'LinkedIn {{company_name}}'
+    query = f"LinkedIn {company_name}"
+    search_results = google_search(query)
+    company_linkedin_url = extract_linkedin_url(search_results, True)
+    print(company_linkedin_url)
+
+    if not company_linkedin_url:
+        return "Company LinkedIn URL not found."
+
+    # Scrape company LinkedIn page
+    company_page_content = scrape_linkedin(company_linkedin_url, True)
+    if "data" not in company_page_content:
+        return "LinkedIn profile not found"
+    
+    company_profile = company_page_content["data"]
+    return {
+        "company_name": company_profile.get("company_name", ""),
+        "company_description": company_profile.get("description", ""),
+        "company_website": company_profile.get("website", ""),
+        "company_location": company_profile.get("locations", []),
+        "company_industry": company_profile.get("industries", []),
+        "company_size": company_profile.get("employee_count", company_profile.get("employee_range", ""))
+    }
 
 def search_lead_profile(lead_name, company_name):
-    return {'about': 'Please FOLLOW rather than connect unless we really know each other. If we know each other, say how. \n\nI CANNOT RESPOND to individual questions about agile as I simply get too many here to meet my other commitments. Besides, I\'ve probably already answered it in a book, video course, or on my blog at www.mountaingoatsoftware.com/blog. \n\nAs an in-demand agile and Scrum instructor, I train groups all over the world on how to adopt and succeed with agile software development using the Scrum framework. \n\nAs an author, I\'ve written three popular books on Scrum and agile: "Succeeding with Agile," "Agile Estimating and Planning" and "User Stories Applied for Agile Software Development."\n\nI\'m co-founder and past chairperson of the non-profit Agile Alliance, and also co-founded and served on the board of directors of the non-profit Scrum Alliance.\n\nI started running projects with Scrum in 1995, working in domains from banking to aerospace to video game development, with companies ranging in size from 1 to 400,000.  \n\nI served as VP of development at four different companies where agile was instrumental to the their success. Three of those companies were startups, and the other was a Fortune 40 company. \n\nMy hands-on experience means my Scrum and agile training and coaching is relevant to the real business world and not just theory.\n\nIf you link to me just to sell me something, I will block you. \n',
-            'skills': [],
-            'educations': [{'field_of_study': 'Economics', 'date_range': '1984 - 1986'}],
-            'experiences': [{'company': 'Mountain Goat Software',
-              'title': 'Owner',
-              'date_range': 'Jan 2000 - present',
-              'is_current': True,
-              'location': '',
-              'description': "As the founder of Mountain Goat Software, an agile and Scrum training company, I lead all public Scrum and agile training in person. I'm a Certified Scrum Trainer (CST), author of three popular books on agile and Scrum, an agile practitioner and consultant."},
-              {'company': 'ePlan Services',
-              'title': 'Vice President, Software Development',
-              'date_range': '2003 - 2004',
-              'is_current': False,
-              'location': 'Denver',
-              'description': 'I was the vice president of software development at ePlan Services and over the course of a year introduced the organization to Scrum.'},
-              {'company': 'Genomica',
-              'title': 'VP, Software Development',
-              'date_range': 'Sep 2000 - Dec 2001',
-              'is_current': False,
-              'location': '',
-              'description': ''},
-              {'company': 'Access Health',
-              'title': 'VP Software Development',
-              'date_range': '1994 - 1998',
-              'is_current': False,
-              'location': '',
-              'description': ''},
-              {'company': 'Telephone Response Technologies Inc',
-              'title': 'Software Team Leader',
-              'date_range': '1990 - 1994',
-              'is_current': False,
-              'location': '',
-              'description': ''}]
-            }
+    """
+    Searches for the lead's LinkedIn profile based on the lead name and company name.
+    
+    @param lead_name: The name of the lead to search for.
+    @param company_name: The name of the company to associate with the lead.
+    @return: A dictionary containing the lead profile data or an error message if not found.
+    """
+    # Find lead LinkedIn URL by searching on Google 'LinkedIn {{lead_name}} {{company_name}}'
+    query = f"LinkedIn {lead_name} {company_name}"
+    search_results = google_search(query)
+    lead_linkedin_url = extract_linkedin_url(search_results, False)
 
+    if not lead_linkedin_url:
+        return "Lead LinkedIn URL not found."
+
+    # Scrape lead LinkedIn profile
+    lead_profile_content = scrape_linkedin(lead_linkedin_url, False)
+    if "data" not in lead_profile_content:
+        return "LinkedIn profile not found"
+    
+    lead_profile_content = lead_profile_content["data"]
+    return {
+        "about": lead_profile_content.get('about', ''),
+        "skills": lead_profile_content.get('skills', []),
+        "educations": [
+            {
+                "field_of_study": edu.get('field_of_study', ''),
+                "date_range": edu.get('date_range', '')
+            } for edu in lead_profile_content.get('educations', [])
+        ],
+        "experiences": [
+            {
+                "company": exp.get('company', ''),
+                "title": exp.get('title', ''),
+                "date_range": exp.get('date_range', ''),
+                "is_current": exp.get('is_current', False),
+                "location": exp.get('location', ''),
+                "description": exp.get('description', '')
+            } for exp in lead_profile_content.get('experiences', [])
+        ]
+    }
 
 def scrape_website(url):
     """
