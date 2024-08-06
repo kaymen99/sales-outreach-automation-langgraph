@@ -1,22 +1,22 @@
-<!--
-Title: AI-Sales-Outreach: AI HubSpot Lead Outreach Automation System
-Description: Discover our AI-powered lead outreach automation system that integrates with HubSpot and LinkedIn to streamline lead research, scoring, and personalized emailing and call script generation.
-Keywords: AI sales outreach, lead automation, HubSpot integration, LinkedIn lead research, personalized outreach, lead scoring, AI agents, AI tools
-Author: kaymen99
--->
-
-<meta name="title" content="AI-Sales-Outreach: AI HubSpot Lead Outreach Automation System">
-<meta name="description" content="Discover our AI-powered lead outreach automation system that integrates with HubSpot and LinkedIn to streamline lead research, scoring, and personalized emailing and call script generation.">
-<meta name="keywords" content="AI sales outreach, lead automation, HubSpot integration, LinkedIn lead research, personalized outreach, lead scoring, AI agents, AI tools">
-<meta name="author" content="kaymen99">
-<meta property="og:title" content="AI-Sales-Outreach: AI HubSpot Lead Outreach Automation System">
-<meta property="og:description" content="Streamline your lead outreach with our AI-powered system, integrating with HubSpot and LinkedIn for effective lead research, scoring, and personalized emailing and call script generation.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://github.com/kaymen99/AI-sales-outreach">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Sales-Outreach: AI Hubspot Lead Outreach Automation System</title>
+    <meta name="description" content="Discover our AI-powered lead outreach automation system that integrates with HubSpot and LinkedIn to streamline lead research, scoring, and personalized communication.">
+    <meta name="keywords" content="AI sales outreach, lead automation, HubSpot integration, LinkedIn lead research, personalized outreach, lead scoring, AI communication tools">
+    <meta name="author" content="kaymen99">
+    <meta property="og:title" content="AI-Sales-Outreach: AI Hubspot Lead Outreach Automation System">
+    <meta property="og:description" content="Streamline your lead outreach with our AI-powered system, integrating with HubSpot and LinkedIn for effective lead research, scoring, and personalized communication.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://github.com/kaymen99/AI-sales-outreach">
+</head>
+<body>
     
 # AI-Sales-Outreach
 
-I developed an AI-powered lead outreach automation system that integrates with HubSpot and LinkedIn to streamline lead research and outreach. This project includes automated lead research, lead scoring, identification of company pain points, and personalized communication via email, video, and call scripts.
+I developed an AI-powered lead outreach automation system that integrates with HubSpot and LinkedIn to streamline lead research and outreach. This project includes monitoring Hubspot contacts list, automated lead research, lead scoring, identification of company pain points, and personalized communication via email, video, and call scripts.
 
 - **Integrate with HubSpot CRM to fetch new leads and record contacts updates.**
 - **Research leads on LinkedIn and score them based on specified business rules.**
@@ -118,4 +118,6 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 
 ### Contact
 
-For questions or suggestions, contact me at `aymenMir1001@gmail.com`.
+For questions or suggestions, contact me at `aymenMir10001@gmail.com`.
+</body>
+</html>
