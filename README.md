@@ -1,6 +1,19 @@
+<<<<<<< HEAD
 # AI-Sales-Outreach-Langgraph
 
 I developed an AI-powered lead outreach automation system using Langgraph that integrates with HubSpot and LinkedIn to streamline lead research and outreach. This project includes monitoring Hubspot contacts list, automated lead research, lead scoring, identification of company pain points, and personalized communication via email, video, and call scripts.
+=======
+<!--
+Title: AI-Sales-Outreach: AI HubSpot Lead Outreach Automation System
+Description: Discover our AI-powered lead outreach automation system that integrates with HubSpot and LinkedIn to streamline lead research, scoring, and personalized emailing and call script generation.
+Keywords: AI sales outreach, lead automation, HubSpot integration, LinkedIn lead research, personalized outreach, lead scoring, AI agents, AI tools
+Author: kaymen99
+-->
+    
+# AI-Sales-Outreach
+
+I developed an AI-powered lead outreach automation system that integrates with HubSpot and LinkedIn to streamline lead research and outreach. This project includes monitoring Hubspot contacts list, automated lead research, lead scoring, identification of company pain points, and personalized communication via email, video, and call scripts.
+>>>>>>> 660be465ec7ea82f2b9ae71dde0288dab45bc735
 
 - **Integrate with HubSpot CRM to fetch new leads and record contacts updates.**
 - **Research leads on LinkedIn and score them based on specified business rules.**
