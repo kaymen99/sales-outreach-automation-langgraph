@@ -81,6 +81,49 @@ def scrape_linkedin(linkedin_url, is_company):
     else:
         print(f"Request failed with status code: {response.status_code}")
 
+def scrape_website(url):
+    """
+    Scrapes text content from the provided website URL.
+    
+    @param url: The URL of the website to scrape.
+    @return: The scraped text content.
+    """
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Accept-Encoding": "gzip, deflate",
+        "Connection": "keep-alive",
+    }
+
+    response = requests.get(url, headers=headers)
+    soup = BeautifulSoup(response.text, "html.parser")
+    content = soup.get_text()
+
+    # Normalize whitespaces and clean up text
+    content = re.sub("\s+", " ", content).strip()
+
+    return content
+
+def fetch_company_jobs(company_url):
+    """
+    Fetches the open positions from the company's career page.
+    
+    @param company_url: The URL of the company's career page.
+    @return: The extracted job positions from the career page.
+    """
+    content = scrape_website(company_url)
+    messages = [
+        {"role": "system", "content": extract_customer_support_jobs_prompt},
+        {"role": "user", "content": content}
+    ]
+    response = completion(
+        model="groq/llama3-70b-8192",
+        messages=messages,
+        temperature=0.1
+    )
+    response_message = response.choices[0].message.content
+    return response_message
+
 def search_lead_company(company_name):
     """
     Searches for the company LinkedIn profile based on the company name.
@@ -154,46 +197,3 @@ def search_lead_profile(lead_name, company_name):
             } for exp in lead_profile_content.get('experiences', [])
         ]
     }
-
-def scrape_website(url):
-    """
-    Scrapes text content from the provided website URL.
-    
-    @param url: The URL of the website to scrape.
-    @return: The scraped text content.
-    """
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36",
-        "Accept-Language": "en-US,en;q=0.5",
-        "Accept-Encoding": "gzip, deflate",
-        "Connection": "keep-alive",
-    }
-
-    response = requests.get(url, headers=headers)
-    soup = BeautifulSoup(response.text, "html.parser")
-    content = soup.get_text()
-
-    # Normalize whitespaces and clean up text
-    content = re.sub("\s+", " ", content).strip()
-
-    return content
-
-def fetch_company_jobs(company_url):
-    """
-    Fetches the open positions from the company's career page.
-    
-    @param company_url: The URL of the company's career page.
-    @return: The extracted job positions from the career page.
-    """
-    content = scrape_website(company_url)
-    messages = [
-        {"role": "system", "content": extract_customer_support_jobs_prompt},
-        {"role": "user", "content": content}
-    ]
-    response = completion(
-        model="groq/llama3-70b-8192",
-        messages=messages,
-        temperature=0.1
-    )
-    response_message = response.choices[0].message.content
-    return response_message

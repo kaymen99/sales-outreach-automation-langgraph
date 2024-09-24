@@ -1,22 +1,6 @@
-<!--
-Title: AI-Sales-Outreach: AI HubSpot Lead Outreach Automation System
-Description: Discover our AI-powered lead outreach automation system that integrates with HubSpot and LinkedIn to streamline lead research, scoring, and personalized emailing and call script generation.
-Keywords: AI sales outreach, lead automation, HubSpot integration, LinkedIn lead research, personalized outreach, lead scoring, AI agents, AI tools
-Author: kaymen99
--->
+# AI-Sales-Outreach-Langgraph
 
-<meta name="title" content="AI-Sales-Outreach: AI HubSpot Lead Outreach Automation System">
-<meta name="description" content="Discover our AI-powered lead outreach automation system that integrates with HubSpot and LinkedIn to streamline lead research, scoring, and personalized emailing and call script generation.">
-<meta name="keywords" content="AI sales outreach, lead automation, HubSpot integration, LinkedIn lead research, personalized outreach, lead scoring, AI agents, AI tools">
-<meta name="author" content="kaymen99">
-<meta property="og:title" content="AI-Sales-Outreach: AI HubSpot Lead Outreach Automation System">
-<meta property="og:description" content="Streamline your lead outreach with our AI-powered system, integrating with HubSpot and LinkedIn for effective lead research, scoring, and personalized emailing and call script generation.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://github.com/kaymen99/AI-sales-outreach">
-    
-# AI-Sales-Outreach
-
-I developed an AI-powered lead outreach automation system that integrates with HubSpot and LinkedIn to streamline lead research and outreach. This project includes monitoring Hubspot contacts list, automated lead research, lead scoring, identification of company pain points, and personalized communication via email, video, and call scripts.
+I developed an AI-powered lead outreach automation system using Langgraph that integrates with HubSpot and LinkedIn to streamline lead research and outreach. This project includes monitoring Hubspot contacts list, automated lead research, lead scoring, identification of company pain points, and personalized communication via email, video, and call scripts.
 
 - **Integrate with HubSpot CRM to fetch new leads and record contacts updates.**
 - **Research leads on LinkedIn and score them based on specified business rules.**
@@ -38,7 +22,7 @@ I developed an AI-powered lead outreach automation system that integrates with H
 
 This is the detailed flow of the system:
 
-[![](https://mermaid.ink/img/pako:eNqFU8tuwjAQ_JWVz_ADHHoJ9CG1qIX21FSWay8kIrGD7YhWwL937ZAEWig5xTM7s7PrZMukUchGbGlFlcHrONVAzxI917jhBQrl3lN2hx6muIHHcIaFNSXc15-uMj5lHzAc3oDMUK74wlhusRS5zvWyUyeBA-Jg1nKNE4lT3XS8qA_uu1tTawXxvAOHwsosslwJL6jDPELRFMYERePrtlMDpbHYGk-m4zbO7x5xRiepOGKhZTjEjl2zno_luWv061oU-SLHoHpwTciXFjtawZ_6mLGr3NGtaLTCI6_QOqNFwcNMRbyfhoHnAwOTwHTJzltPjYd1b19XKpgnsycutOL4lXuyfosoEAqEwoTQo8wXIsX5O06aQnEpioI7afPKHwdOiIOEOJhHrot8UR29-6wnETt1zzc3h2Ggw7LmGOY42U_P__8xt2OfWdU1IRuwEi2Biv62bbBJmc-wxJSN6FUJu0pZqvdUJ2pv5t9aspG3NQ6YNfUyaw9N63Eu6I8t2WghCof7H6waUo0?type=png)](https://mermaid.live/edit#pako:eNqFU8tuwjAQ_JWVz_ADHHoJ9CG1qIX21FSWay8kIrGD7YhWwL937ZAEWig5xTM7s7PrZMukUchGbGlFlcHrONVAzxI917jhBQrl3lN2hx6muIHHcIaFNSXc15-uMj5lHzAc3oDMUK74wlhusRS5zvWyUyeBA-Jg1nKNE4lT3XS8qA_uu1tTawXxvAOHwsosslwJL6jDPELRFMYERePrtlMDpbHYGk-m4zbO7x5xRiepOGKhZTjEjl2zno_luWv061oU-SLHoHpwTciXFjtawZ_6mLGr3NGtaLTCI6_QOqNFwcNMRbyfhoHnAwOTwHTJzltPjYd1b19XKpgnsycutOL4lXuyfosoEAqEwoTQo8wXIsX5O06aQnEpioI7afPKHwdOiIOEOJhHrot8UR29-6wnETt1zzc3h2Ggw7LmGOY42U_P__8xt2OfWdU1IRuwEi2Biv62bbBJmc-wxJSN6FUJu0pZqvdUJ2pv5t9aspG3NQ6YNfUyaw9N63Eu6I8t2WghCof7H6waUo0)
+[![](https://mermaid.ink/img/pako:eNqtlV1v2jAUhv-K5aq7ClVC2oxm0qYW6G5W2pXtZssUWckBrDpxZjsCCvz3nXwQICtdpTVIKOe89nNef2ZFIxkD9elUsWxGvg2ClOBzekr6UkilyTsyNksBGlOVFAmm9QAmRBumTAhpTCZcCP9k6BU_SxslH8E_cV23fu_MeWxmvmNnCysqqJU4kanpaP4EfrebLT606JmSEWhds697fWfYfyt2DBHXXKY1_ObiqnsxeCu4zE2Wmxp92b32rp3_QDfLcSPkvFmDKZgwhXkogMX6Z0A_gyEjmJMvRRzQX6TT-UiiGUSP4USqUEHCeMrTadVhFdB-oRHUyMNWqzp_CuimqlEP6xikKLG-kTkufxmviQamolmphjEzDH2Ny1RJJgNMobXXYEeSJFLBFjwcDZA1xEr31aZoMNV_u3A5eh0hocwVPoqgtNHu2rQqC3_NmeATDvEapzgFxQyEuJ4KGPITjBRnoprwSiV3tUput2pTocUeSUN-7_h5Fhf0_sNtyNI4hAU3yP1eZglmCWbJELMtxy_4Ksfd6BkoLVMmwmKCxb7n-1ohw0Jp-K8m436Nw4gJEepI8czss_HWiEkfNTIutWPuD92V_N2MHEzE3_7a9Vu99-vtsi8fiXbrZk3-1a05n1dZJpbP3pWHp9XC3by7Ovcvj-NlrN1WsnYerefsbq-2A3D7gFhHlsE6OsXWS5ujvqqxJLVoAgpRMX5RVoWFgJoZJBBQH19jph4DGqQbbMdyI8fLNKK-UTlYVMl8OqP-BIEYVUMbcIafpWTbJGPpDymTphHG1F_RBfW7du_Mu_Dsbs879-zLS69n0SX1O_aZjY_jnnuO4713Xcd2bdfZWPSp5DibP9aEYXI?type=png)](https://mermaid.live/edit#pako:eNqtlV1v2jAUhv-K5aq7ClVC2oxm0qYW6G5W2pXtZssUWckBrDpxZjsCCvz3nXwQICtdpTVIKOe89nNef2ZFIxkD9elUsWxGvg2ClOBzekr6UkilyTsyNksBGlOVFAmm9QAmRBumTAhpTCZcCP9k6BU_SxslH8E_cV23fu_MeWxmvmNnCysqqJU4kanpaP4EfrebLT606JmSEWhds697fWfYfyt2DBHXXKY1_ObiqnsxeCu4zE2Wmxp92b32rp3_QDfLcSPkvFmDKZgwhXkogMX6Z0A_gyEjmJMvRRzQX6TT-UiiGUSP4USqUEHCeMrTadVhFdB-oRHUyMNWqzp_CuimqlEP6xikKLG-kTkufxmviQamolmphjEzDH2Ny1RJJgNMobXXYEeSJFLBFjwcDZA1xEr31aZoMNV_u3A5eh0hocwVPoqgtNHu2rQqC3_NmeATDvEapzgFxQyEuJ4KGPITjBRnoprwSiV3tUput2pTocUeSUN-7_h5Fhf0_sNtyNI4hAU3yP1eZglmCWbJELMtxy_4Ksfd6BkoLVMmwmKCxb7n-1ohw0Jp-K8m436Nw4gJEepI8czss_HWiEkfNTIutWPuD92V_N2MHEzE3_7a9Vu99-vtsi8fiXbrZk3-1a05n1dZJpbP3pWHp9XC3by7Ovcvj-NlrN1WsnYerefsbq-2A3D7gFhHlsE6OsXWS5ujvqqxJLVoAgpRMX5RVoWFgJoZJBBQH19jph4DGqQbbMdyI8fLNKK-UTlYVMl8OqP-BIEYVUMbcIafpWTbJGPpDymTphHG1F_RBfW7du_Mu_Dsbs879-zLS69n0SX1O_aZjY_jnnuO4713Xcd2bdfZWPSp5DibP9aEYXI)
 
 ### **Integration with APIs**
 
@@ -70,8 +54,8 @@ This is the detailed flow of the system:
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/kaymen99/AI-sales-outreach.git
-   cd AI-sales-outreach
+   git clone https://github.com/kaymen99/sales-outreach-automation-langgraph.git
+   cd sales-outreach-automation-langgraph
    ```
 
 2. **Create and activate a virtual environment:**

@@ -1,24 +1,28 @@
 from langgraph.graph import END, StateGraph
-from typing_extensions import TypedDict
-from typing import List
+from typing import List, TypedDict
+from pydantic import BaseModel
 from colorama import Fore, Style
 from .nodes import OutReachAutomationNodes
 
 
-### global graph state
+class LeadData(BaseModel):
+    id: int
+    name: str
+    email: str
+    profile: str
+    score: int
+
+class CompanyData(BaseModel):
+    profile: str
+    open_positions: str
+
 class GraphState(TypedDict):
     leads: List[dict]
-    num_leads: int
-    lead_id: str
-    lead_name: str
-    lead_email: str
-    lead_profile: str
-    lead_score: int
-    company_summary: str
-    company_open_positions: str
+    lead_data: LeadData
+    company_data: CompanyData
     cold_call_script: str
     personal_email: str
-    is_qualified: bool
+    num_leads: int
 
 
 class OutReachAutomation:
@@ -35,17 +39,14 @@ class OutReachAutomation:
         graph.add_node("check_for_remaining_leads", OutReachAutomationNodes.check_for_remaining_leads)
         graph.add_node("search_lead_data", OutReachAutomationNodes.search_lead_data)
         graph.add_node("score_lead", OutReachAutomationNodes.score_lead)
-        graph.add_node("is_lead_qualified", OutReachAutomationNodes.is_lead_qualified)
+        graph.add_node("generate_outreach_materials", OutReachAutomationNodes.generate_outreach_materials)
         graph.add_node("generate_personal_email", OutReachAutomationNodes.generate_personal_email)
         graph.add_node("generate_cold_call_script", OutReachAutomationNodes.generate_cold_call_script)
-        graph.add_node("send_email", OutReachAutomationNodes.send_email)
         graph.add_node("update_CRM", OutReachAutomationNodes.update_CRM)
         graph.add_node("update_CRM_and_exit", OutReachAutomationNodes.update_CRM_and_exit)
 
-        # Setting the entry point of the graph
+        # edges setup
         graph.set_entry_point("get_new_leads")
-        
-        # Adding edges between nodes
         graph.add_edge("get_new_leads", "check_for_remaining_leads")
         graph.add_conditional_edges(
             "check_for_remaining_leads",
@@ -56,23 +57,23 @@ class OutReachAutomation:
             }
         )
         graph.add_edge("search_lead_data", "score_lead")
-        graph.add_edge("score_lead", "is_lead_qualified")
         graph.add_conditional_edges(
-            "is_lead_qualified",
+            "score_lead",
             OutReachAutomationNodes.check_if_qualified,
             {
-                "qualified": "generate_personal_email",
+                "qualified": "generate_outreach_materials",
                 "not qualified": "update_CRM_and_exit"
             }
         )
-        graph.add_edge("generate_personal_email", "generate_cold_call_script")
+        graph.add_edge("generate_outreach_materials", "generate_personal_email")
+        graph.add_edge("generate_outreach_materials", "generate_cold_call_script")
         graph.add_edge("generate_cold_call_script", "update_CRM")
-        graph.add_edge("update_CRM", "send_email")
-        graph.add_edge("send_email", "check_for_remaining_leads")
+        graph.add_edge("generate_personal_email", "update_CRM")
+        graph.add_edge("update_CRM", "check_for_remaining_leads")
         graph.add_edge("update_CRM_and_exit", "check_for_remaining_leads")
 
         return graph.compile()
 
-    def run(self):
+    def invoke(self, inputs):
         print(Fore.GREEN + "----- Running outreach automation -----\n" + Style.RESET_ALL)
-        return self.graph.invoke({'leads': []})
+        return self.graph.invoke(inputs)

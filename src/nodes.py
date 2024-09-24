@@ -16,11 +16,12 @@ class OutReachAutomationNodes:
         @return: Updated state with leads list.
         """
         print(Fore.YELLOW + "----- Fetching new leads -----\n" + Style.RESET_ALL)
-        # Fetching leads (dummy data for example)
+        
+        # Fetch new leads from our Hubspot CRM
         leads = get_new_leads()
-        print(leads)
+        
         print(Fore.YELLOW + f"----- Fetched {len(leads)} leads -----\n" + Style.RESET_ALL)
-        return { **state, "leads": leads, "num_leads": len(leads)}
+        return {"leads": leads, "num_leads": len(leads)}
     
     @staticmethod
     def check_for_remaining_leads(state):
@@ -32,23 +33,16 @@ class OutReachAutomationNodes:
         """
         print(Fore.YELLOW + "----- Checking for remaining leads -----\n" + Style.RESET_ALL)
         leads = state["leads"]
-        lead_id = ""
-        lead_name = ""
-        lead_email = ""
+        lead_data = state["lead_data"]
         if len(leads) > 0:
-            lead_id = leads[-1]["lead_id"]
-            lead_name = leads[-1]["lead_name"]
-            lead_email = leads[-1]["lead_email"]
-            print(lead_id, lead_name, lead_email)
-            # Remove lead being processed 
+            lead_data.id = leads[-1]["lead_id"]
+            lead_data.name = leads[-1]["lead_name"]
+            lead_data.email = leads[-1]["lead_email"]
+            lead_data.profile = ""
+            lead_data.score = 0
+            # Remove lead being processed
             leads.pop()
-        return { 
-            **state, 
-            "leads": leads,
-            "lead_id": lead_id,
-            "lead_name": lead_name,
-            "lead_email": lead_email
-        }
+        return {"lead_data": lead_data}
 
     @staticmethod
     def check_if_there_more_leads(state):
@@ -75,23 +69,28 @@ class OutReachAutomationNodes:
         @return: Updated state with lead data.
         """
         print(Fore.YELLOW + "----- Searching for lead data -----\n" + Style.RESET_ALL)
-        lead_name = state["lead_name"]
-        lead_email = state["lead_email"]
-        # Extracting company name from email
-        company_name = extract_company_name(lead_email)
-        # Searching for company profile
+        lead_data = state["lead_data"]
+        company_data = state["company_data"]
+
+        # extract company name from pro email
+        company_name = extract_company_name(lead_data.email)
+        
+        # scrape lead linkedin profile
+        lead_profile = search_lead_profile(lead_data.name, company_name)
+        lead_data.profile = lead_profile
+
+        # scrape lead's company linkedin & website
         company_profile = search_lead_company(company_name)
-        # Searching for lead profile
-        lead_profile = search_lead_profile(lead_name, company_name)
+        company_data.profile = str(company_profile)
+        
         # Fetching company jobs
         if "company_website" in company_profile:
             company_website = company_profile["company_website"] + "/careers"
             company_open_positions = fetch_company_jobs(company_website)
+            company_data.open_positions = company_open_positions
         return {
-            **state,
-            "company_summary": company_profile,
-            "lead_profile": lead_profile,
-            "company_open_positions": company_open_positions
+            "lead_data": lead_data,
+            "company_data": company_data
         }
 
     @staticmethod
@@ -104,8 +103,11 @@ class OutReachAutomationNodes:
         """
         print(Fore.YELLOW + "----- Scoring lead -----\n" + Style.RESET_ALL)
         # Scoring lead
-        lead_score = score_lead(state["company_summary"], state["company_open_positions"])
-        return {**state, "lead_score": lead_score}
+        company_data = state["company_data"]
+        lead_score = score_lead(company_data.profile, company_data.open_positions)
+        lead_data = state["lead_data"]
+        lead_data.score = lead_score
+        return {"lead_data": lead_data}
 
     @staticmethod
     def is_lead_qualified(state):
@@ -127,13 +129,17 @@ class OutReachAutomationNodes:
         @return: Updated state with the qualification status.
         """
         # Checking if the lead score is 50 or higher
-        is_qualified = int(state["lead_score"]) >= 50
+        is_qualified = int(state["lead_data"].score) > 50
         if is_qualified:
             print(Fore.GREEN + "Lead is qualified\n" + Style.RESET_ALL)
             return "qualified"
         else:
             print(Fore.RED + "Lead is not qualified\n" + Style.RESET_ALL)
             return "not qualified"
+    
+    @staticmethod
+    def generate_outreach_materials(state):
+        return state
 
     @staticmethod
     def generate_personal_email(state):
@@ -144,9 +150,15 @@ class OutReachAutomationNodes:
         @return: Updated state with the generated email.
         """
         print(Fore.YELLOW + "----- Generating personalized email -----\n" + Style.RESET_ALL)
-        # Personalizing email
-        personal_email = personalize_email(state["company_summary"], state["lead_profile"])
-        return {**state, "personal_email": personal_email}
+        lead_data = state["lead_data"]
+        company_data = state["company_data"]
+        personal_email = personalize_email(company_data.profile, lead_data.profile)
+
+        # save email to file or as draft
+        with open("output.txt", "a") as file:
+            file.write("Email:\n\n")
+            file.write(personal_email + f'\n{"-"*70}\n')
+        return {"personal_email": personal_email}
 
     @staticmethod
     def generate_cold_call_script(state):
@@ -157,32 +169,20 @@ class OutReachAutomationNodes:
         @return: Updated state with the generated cold call script.
         """
         print(Fore.YELLOW + "----- Generating cold call script -----\n" + Style.RESET_ALL)
-        lead_name = state["lead_name"]
+        lead_data = state["lead_data"]
+        company_data = state["company_data"]
+        
         # Generating SPIN questions
-        spin_questions = generate_spin_questions(lead_name, state["lead_profile"], state["company_summary"])
+        spin_questions = generate_spin_questions(lead_data.name, lead_data.profile, company_data.profile)
+        
         # Generating cold call script
-        cold_call_script = generate_cold_call_script(lead_name, state["lead_profile"], state["company_summary"], spin_questions)
-        return {
-            **state,
-            "cold_call_script": cold_call_script
-        }
+        cold_call_script = generate_cold_call_script(lead_data.name, lead_data.profile, company_data.profile, spin_questions)
 
-    @staticmethod
-    def send_email(state):
-        """
-        Send an email to the lead.
-
-        @param state: The current state of the application.
-        @return: Updated state after sending the email.
-        """
-        print(Fore.YELLOW + "----- Sending email -----\n" + Style.RESET_ALL)
-        # Writing email and call script to output file
+        # save script to file
         with open("output.txt", "a") as file:
-            file.write("Email:\n\n")
-            file.write(state["personal_email"] + f'\n{"-"*70}\n')
             file.write("Call Script:\n\n")
-            file.write(state["cold_call_script"] + f'\n{"-"*70}\n')
-        return state
+            file.write(cold_call_script + f'\n{"-"*70}\n')
+        return {"cold_call_script": cold_call_script}
 
     @staticmethod
     def update_CRM(state):
@@ -195,10 +195,7 @@ class OutReachAutomationNodes:
         print(Fore.YELLOW + "----- Updating CRM records -----\n" + Style.RESET_ALL)
         # Set lead to attempt contact in Hubspot contacts CRM
         update_lead_status(state["lead_id"], "ATTEMPTED_TO_CONTACT")
-        return {
-            **state,
-            "num_leads": state["num_leads"] - 1,
-        }
+        return {"num_leads": state["num_leads"] - 1}
 
     @staticmethod
     def update_CRM_and_exit(state):
@@ -211,7 +208,4 @@ class OutReachAutomationNodes:
         print(Fore.YELLOW + "----- Lead not qualified, updating CRM records and Stopping -----\n" + Style.RESET_ALL)
         # Set lead to unqualified in Hubspot contacts CRM
         update_lead_status(state["lead_id"], "UNQUALIFIED")
-        return {
-            **state,
-            "num_leads": state["num_leads"] - 1,
-        }
+        return {"num_leads": state["num_leads"] - 1}

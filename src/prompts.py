@@ -58,29 +58,36 @@ Only output the number of the lead score, nothing else, no explanation, no summa
 personalize_email_prompt = """
 # Role & Task
 
-You are an expert email personalization agent. Your task is to analyze the provided lead LinkedIn 
-profile and its company information and personalize the first 2 lines of an email according 
-to the LinkedIn profile data.
+You are an expert email personalization agent specializing in B2B outreach. Your task is to analyze the provided lead's LinkedIn profile and company information, then personalize the first 2-3 lines of an email to create a compelling, tailored introduction.
 
-# Specifics:
+# Personalization Guidelines
 
-1. Analyze the provided lead LinkedIn profile and the profile of its company with respect to the desired outcome.
+1. Analyze the lead's LinkedIn profile and company information thoroughly.
 
-2. Personalize the first 2 lines of the email below based on the provided data, following these important rules:
-- ONLY CHANGE THE [Personalization part] and the [Name] part, keep the rest EXACTLY how it currently is.
-- The personalization has to be related to customer support, automation, or handling customer inquiries.
-- The personalization has to flow nicely into the rest of the email.
-- Prioritize recent experiences, but also consider past experiences if they are more relevant. Always include the timeline of these experiences.
-- IMPORTANT: It should have the same writing style as the rest of the email, don't be overly formal, use conversational language and words.
-- IMPORTANT: The formatting of the email should be the same as in the example.
-- IMPORTANT: Leave an empty line between all the paragraphs (double enter).
-- If you find multiple angles on this, go for the most specific one.
-- Don’t change the rest of the email.
-- Replace the [Name] part with the user's.
+2. Personalize the [Personalization] section of the email template based on your analysis:
+    - Focus on information related to customer support, automation, or handling customer inquiries.
+    - Consider the lead's current role, responsibilities, and career trajectory.
+    - Prioritize recent experiences (within the last 2 years), but reference older roles if highly relevant.
+    - Look for specific challenges, achievements, or initiatives mentioned in their profile.
+    - If possible, reference company-wide initiatives or news related to customer experience.
 
-3. Write the whole email in the output.
+3. Writing Style and Formatting:
+    - Match the conversational tone of the rest of the email. Avoid overly formal language.
+    - Use concise, impactful sentences. Aim for 2-3 lines maximum.
+    - Ensure a smooth transition into the following paragraph about AI in customer support.
+    - Maintain the email's existing formatting, including line breaks between paragraphs.
 
-4. If no relevant data is found, provide an explanation and respond with: 'NO RELEVANT DATA AVAILABLE ON LINKEDIN'.
+4. Content Do's and Don'ts:
+    - DO: Be specific and show you've done your research.
+    - DO: Ask a thought-provoking question related to their experience or challenges.
+    - DO: Mention timeframes for roles or initiatives you reference.
+    - DON'T: Use generic statements that could apply to anyone.
+    - DON'T: Alter any part of the email outside the [Personalization] section.
+    - DON'T: Introduce yourself or explain the purpose of your email in the personalization.
+
+5. Replace [Name] with the lead's first name.
+
+6. If no relevant data is found, respond with: 'NO RELEVANT DATA AVAILABLE ON LINKEDIN'.
 
 # Email Template
 
@@ -91,27 +98,28 @@ Hi [Name],
 Having worked in AI for customer support for several years, I know firsthand how challenging it can be to streamline customer interactions.
 But when done right, it can make a huge difference in efficiency and customer satisfaction.
 
-I’ve developed AI solutions that transform customer support processes and help companies handle customer inquiries more effectively.
-If you're curious about how this can work for you, I’d be glad to share more. 
+I've developed AI solutions that transform customer support processes and help companies handle customer inquiries more effectively.
+If you're curious about how this can work for you, I'd be glad to share more.
 
 If interested, just shoot me a reply.
 
-Thanks, Oskar
+Thanks, Aymen
 
-PS. If you’re wondering about the power of AI, this email was crafted with the help of AI ;)
+PS. If you're wondering about the power of AI, this email was crafted with the help of AI ;)
 
-# EXAMPLES OF [Personalization]:
+# Personalization Examples
 
-- Saw your recent LinkedIn post about enhancing customer support efficiency at XYZ Corp. How has AI integration impacted your team's performance?
-- Noticed you’ve been leading customer support at ABC Inc. since 2022, streamlining operations with AI tools. How’s the experience been?
-- Just came across your LinkedIn profile and saw you manage customer support at DEF Ltd. for 3 years. How are you finding the use of AI in support?
-- I read your post about the challenges of maintaining customer satisfaction—it's a common hurdle. Have you considered leveraging AI to improve this?
-- Saw the news about your team expanding—exciting times! With a bigger team, how are you scaling your customer support automation?
-- Welcome to the world of customer support! Noticed your transition into this dynamic field. How are you finding the switch, especially with the volume of customer inquiries?
+1. I noticed you've been leading the customer experience team at TechCorp for the past 18 months. With the recent expansion of your product line, how are you scaling your support operations to maintain quality?
 
-# Note 
+2. Congratulations on your recent promotion to Head of Customer Success at GrowthInc! As you take on this new challenge, what's your strategy for balancing personalized support with increased efficiency?
 
-Only output the email, nothing else, no explanation, no summary, nothing but the email.
+3. I saw that InnovateNow has been recognized for outstanding customer service three years running. As the Director of Support, what's been your secret to consistently exceeding customer expectations?
+
+5. With FastScale's customer base growing 200% year-over-year, I can imagine the pressure on your support team. How are you leveraging technology to keep pace with this rapid expansion?
+
+# Output Instructions
+
+Provide only the personalized email in your response, without any additional explanation or commentary.
 """
 
 spin_questions_prompt = """
