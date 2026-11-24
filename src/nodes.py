@@ -583,12 +583,20 @@ class OutReachAutomationNodes:
     def update_CRM(self, state: GraphState):
         print(Fore.YELLOW + "----- Updating CRM records -----\n" + Style.RESET_ALL)
         
+        # Determine qualification status based on score threshold
+        try:
+            is_qualified = float(state.get("lead_score", 0)) >= 7
+        except (ValueError, TypeError):
+            is_qualified = False
+
+        status = "ATTEMPTED_TO_CONTACT" if is_qualified else "UNQUALIFIED"
+
         # save new record data, ensure correct fields are used
         new_data = {
-            "Status": "ATTEMPTED_TO_CONTACT", # Set lead to attempted contact
-            "Score": state["lead_score"], 
-            "Analysis Reports": state["reports_folder_link"],
-            "Outreach Report": state["custom_outreach_report_link"],
+            "Status": status,
+            "Score": state.get("lead_score", ""), 
+            "Analysis Reports": state.get("reports_folder_link", ""),
+            "Outreach Report": state.get("custom_outreach_report_link", ""),
             "Last Contacted": get_current_date()
         }
         self.lead_loader.update_record(state["current_lead"].id, new_data)
@@ -596,4 +604,8 @@ class OutReachAutomationNodes:
         # reset reports list
         state["reports"] = []
         
-        return {"number_leads": state["number_leads"] - 1}
+        return {
+            "number_leads": state["number_leads"] - 1,
+            "reports_folder_link": "",
+            "custom_outreach_report_link": ""
+        }
